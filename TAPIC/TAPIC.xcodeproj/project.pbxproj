@@ -20,6 +20,10 @@
 		6810A39318A46F5800FD1F4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6810A39118A46F5800FD1F4D /* InfoPlist.strings */; };
 		6810A39518A46F5800FD1F4D /* TAPICTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6810A39418A46F5800FD1F4D /* TAPICTests.m */; };
 		6810A39F18A4701900FD1F4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6810A39E18A4701900FD1F4D /* Main.storyboard */; };
+		687AD44418A839D200E03673 /* TAPICVoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687AD44318A839D200E03673 /* TAPICVoiceViewController.m */; };
+		68ABDFDF18B1668200438DEF /* TAPICSOSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */; };
+		68ABDFE218B1B8DF00438DEF /* TAPICTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABDFE118B1B8DF00438DEF /* TAPICTextViewController.m */; };
+		68ABDFE518B28DA900438DEF /* TAPICTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,14 @@
 		6810A39218A46F5800FD1F4D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6810A39418A46F5800FD1F4D /* TAPICTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAPICTests.m; sourceTree = "<group>"; };
 		6810A39E18A4701900FD1F4D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		687AD44218A839D200E03673 /* TAPICVoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAPICVoiceViewController.h; path = TAPIC/TAPICVoiceViewController.h; sourceTree = "<group>"; };
+		687AD44318A839D200E03673 /* TAPICVoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAPICVoiceViewController.m; path = TAPIC/TAPICVoiceViewController.m; sourceTree = "<group>"; };
+		68ABDFDD18B1668100438DEF /* TAPICSOSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICSOSViewController.h; sourceTree = "<group>"; };
+		68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICSOSViewController.m; sourceTree = "<group>"; };
+		68ABDFE018B1B8DF00438DEF /* TAPICTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICTextViewController.h; sourceTree = "<group>"; };
+		68ABDFE118B1B8DF00438DEF /* TAPICTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICTextViewController.m; sourceTree = "<group>"; };
+		68ABDFE318B28DA900438DEF /* TAPICTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICTabBarController.h; sourceTree = "<group>"; };
+		68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +92,14 @@
 			isa = PBXGroup;
 			children = (
 				6810A39E18A4701900FD1F4D /* Main.storyboard */,
+				68ABDFE318B28DA900438DEF /* TAPICTabBarController.h */,
+				68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */,
+				68ABDFE018B1B8DF00438DEF /* TAPICTextViewController.h */,
+				68ABDFE118B1B8DF00438DEF /* TAPICTextViewController.m */,
+				687AD44218A839D200E03673 /* TAPICVoiceViewController.h */,
+				687AD44318A839D200E03673 /* TAPICVoiceViewController.m */,
+				68ABDFDD18B1668100438DEF /* TAPICSOSViewController.h */,
+				68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */,
 				6810A37518A46F5800FD1F4D /* TAPIC */,
 				6810A38E18A46F5800FD1F4D /* TAPICTests */,
 				6810A36E18A46F5800FD1F4D /* Frameworks */,
@@ -244,8 +264,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68ABDFDF18B1668200438DEF /* TAPICSOSViewController.m in Sources */,
 				6810A38018A46F5800FD1F4D /* TAPICAppDelegate.m in Sources */,
+				68ABDFE218B1B8DF00438DEF /* TAPICTextViewController.m in Sources */,
+				68ABDFE518B28DA900438DEF /* TAPICTabBarController.m in Sources */,
 				6810A37C18A46F5800FD1F4D /* main.m in Sources */,
+				687AD44418A839D200E03673 /* TAPICVoiceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +470,7 @@
 				6810A39A18A46F5800FD1F4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6810A39B18A46F5800FD1F4D /* Build configuration list for PBXNativeTarget "TAPICTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +479,7 @@
 				6810A39D18A46F5800FD1F4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

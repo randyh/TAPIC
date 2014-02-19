@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6AE9C94D-9166-47BA-B8A8-7866AE673CCE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TAPIC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A865D95F-A936-461D-BF69-D5400666D90D</key>
+		<string>https://github.com/randyh/TAPIC.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TAPIC/TAPIC.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A865D95F-A936-461D-BF69-D5400666D90D</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/randyh/TAPIC.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A865D95F-A936-461D-BF69-D5400666D90D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A865D95F-A936-461D-BF69-D5400666D90D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TAPIC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
