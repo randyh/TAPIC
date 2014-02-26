@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511ABD3C18BDC65D00CDDA7C /* caf_generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 511ABD3B18BDC65D00CDDA7C /* caf_generator.m */; };
 		6810A37018A46F5800FD1F4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6810A36F18A46F5800FD1F4D /* Foundation.framework */; };
 		6810A37218A46F5800FD1F4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6810A37118A46F5800FD1F4D /* CoreGraphics.framework */; };
 		6810A37418A46F5800FD1F4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6810A37318A46F5800FD1F4D /* UIKit.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		511ABD3A18BDC65D00CDDA7C /* caf_generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = caf_generator.h; sourceTree = "<group>"; };
+		511ABD3B18BDC65D00CDDA7C /* caf_generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = caf_generator.m; sourceTree = "<group>"; };
 		6810A36C18A46F5800FD1F4D /* TAPIC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TAPIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6810A36F18A46F5800FD1F4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6810A37118A46F5800FD1F4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +94,8 @@
 		6810A36318A46F5800FD1F4D = {
 			isa = PBXGroup;
 			children = (
+				511ABD3A18BDC65D00CDDA7C /* caf_generator.h */,
+				511ABD3B18BDC65D00CDDA7C /* caf_generator.m */,
 				6810A39E18A4701900FD1F4D /* Main.storyboard */,
 				68ABDFE318B28DA900438DEF /* TAPICTabBarController.h */,
 				68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */,
@@ -265,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68ABDFDF18B1668200438DEF /* TAPICSOSViewController.m in Sources */,
+				511ABD3C18BDC65D00CDDA7C /* caf_generator.m in Sources */,
 				6810A38018A46F5800FD1F4D /* TAPICAppDelegate.m in Sources */,
 				68ABDFE218B1B8DF00438DEF /* TAPICTextViewController.m in Sources */,
 				68ABDFE518B28DA900438DEF /* TAPICTabBarController.m in Sources */,
