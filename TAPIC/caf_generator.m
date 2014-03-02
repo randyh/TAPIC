@@ -44,7 +44,76 @@ NSString *low = @"4444";
 
 NSString *file_info;
 
+TAPICbinary_converter* bhelper;
+
 char newline = '\n';
+
+
++ (void) gen_audiofile:(NSString*) input {
+    NSString* header;
+    
+    
+    
+    header = [NSString stringWithFormat:@"%@,%@", filetype, fileversion];
+    header = [NSString stringWithFormat:@"%@,%@", header, fileflags];
+    header = [NSString stringWithFormat:@"%@,%@", header, chunkType];
+    
+    int input_bytesize = [input length];
+    NSMutableArray* b = [bhelper text2binary:input_bytesize];
+    chunkSize = [bhelper convert_64bitfloat:b];
+    
+    header = [NSString stringWithFormat:@"%@,%@", header, chunkSize];
+    
+    header = [NSString stringWithFormat:@"%@,%@", header, samplerate];
+    
+    header = [NSString stringWithFormat:@"%@,%@", header, formatID];
+    header = [NSString stringWithFormat:@"%@,%@", header, formatFlags];
+    header = [NSString stringWithFormat:@"%@,%@", header, bytesperpacket];
+    header = [NSString stringWithFormat:@"%@,%@", header, channelsPerFrame];
+    header = [NSString stringWithFormat:@"%@,%@", header, bitsPerChannel];
+    header = [NSString stringWithFormat:@"%@,%@", header, editCount];
+    
+    NSMutableArray* input_binary = [bhelper text2binary:input];
+    
+    file_info = [[NSString alloc] init];
+    
+    
+    for(int i = 0; i < [input_binary count]; i++){
+        int f = [[input_binary objectAtIndex:i] intValue];
+        if(f == 1 ){
+            file_info =  [file_info stringByAppendingString: high];
+        }
+        else {
+            file_info = [file_info stringByAppendingString: high];
+        }
+        
+    }
+    
+    //now we put together the entire string for the file
+    NSString* file_data =[header stringByAppendingString: file_info];
+    
+    //now only need to format the string with space and newline characters
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+
+    
+    
+    
+    
+    
+}
+
 
 
 

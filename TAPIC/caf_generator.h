@@ -13,8 +13,10 @@
     //add constructor method
 
     //add method to create file
+    //before this is called we must ensure that the input string is not an EMPTY string
+    + (void) gen_audiofile:(NSString*) input;
 
-    //add TAPICbinary_converter object
+
 
 
 

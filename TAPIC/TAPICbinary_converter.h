@@ -11,7 +11,7 @@
 @interface TAPICbinary_converter : NSObject
 
 
-    //add constructor method
+    //add constructor method, but there are no constuctors in objective c...
 
     + (NSString*) convert2_hex:(NSMutableArray*) b;
     + (NSMutableArray*)convert_64bitfloat:(int) k;
