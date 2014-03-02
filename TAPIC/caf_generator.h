@@ -15,7 +15,7 @@
 
 
 
-    + (NSMutableArray*)text2binary:(NSString *)input;
+
 
 
 @end
