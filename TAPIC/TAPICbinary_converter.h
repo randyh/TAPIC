@@ -10,6 +10,10 @@
 
 @interface TAPICbinary_converter : NSObject
 
+
+    //add constructor method
+
+    + (NSString*) convert2_hex:(NSMutableArray*) b;
     + (NSMutableArray*)convert_64bitfloat:(int) k;
     + (NSMutableArray*)text2binary:(NSString *)input;
 

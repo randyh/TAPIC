@@ -11,6 +11,69 @@
 @implementation TAPICbinary_converter
 
 
+
+//converts a binary array to a hexadecimal string
++ (NSString*) convert2_hex:(NSMutableArray*) b {
+    
+    NSString* hex;
+    
+    int h_count = [b count]/4;
+    
+    for(int i = 0; i < h_count; i++){
+        int k = i * 4;
+        int bit = 0;
+        int hvalue = 0;
+        int exp = 8;
+        for(int j = 0; j<4; j++){
+            bit = (int)[b objectAtIndex:(k+j)];
+            hvalue += bit*exp;
+            exp = exp / 2;
+        }
+        NSString* c = @"0";
+        //now need to find the hex character which corresponds to the hex value
+        if(hvalue == 1){
+            c = @"1";
+        }
+        else if(hvalue == 2)
+            c = @"2";
+        else if(hvalue == 3)
+            c = @"3";
+        else if(hvalue == 4)
+            c = @"4";
+        else if(hvalue == 5)
+            c = @"5";
+        else if(hvalue == 6)
+            c = @"6";
+        else if(hvalue == 7)
+            c = @"7";
+        else if(hvalue == 8)
+            c = @"8";
+        else if( hvalue == 9)
+            c = @"9";
+        else if(hvalue == 10)
+            c = @"A";
+        else if(hvalue == 11)
+            c = @"B";
+        else if(hvalue == 12)
+            c = @"C";
+        else if(hvalue == 13)
+            c = @"D";
+        else if(hvalue == 14)
+            c = @"E";
+        else if(hvalue == 15)
+            c = @"F";
+
+        hex = [NSString stringWithFormat:@"%@,%@", hex, c];
+        
+    }
+    
+    
+    
+    return hex;
+}
+
+
+
 //step 1 - concert to binary
 //step 2 move radix to after first bit * 2^exp representation
 // add 1023 to the exponent
@@ -73,7 +136,6 @@
     return fbinary;
     
 }
-
 
 
 

@@ -10,7 +10,11 @@
 
 @interface caf_generator : NSObject
 
+    //add constructor method
 
+    //add method to create file
+
+    //add TAPICbinary_converter object
 
 
 
