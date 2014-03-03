@@ -13,8 +13,8 @@
 
     //add constructor method, but there are no constuctors in objective c...
 
-    + (NSString*) convert2_hex:(NSMutableArray*) b;
-    + (NSMutableArray*)convert_64bitfloat:(int) k;
-    + (NSMutableArray*)text2binary:(NSString *)input;
+    - (NSString*) convert2_hex:(NSMutableArray*) b;
+    - (NSMutableArray*)convert_64bitfloat:(int) k;
+    - (NSMutableArray*)text2binary:(NSString *)input;
 
 @end

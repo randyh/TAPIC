@@ -13,7 +13,7 @@
 
 
 //converts a binary array to a hexadecimal string
-+ (NSString*) convert2_hex:(NSMutableArray*) b {
+- (NSString*) convert2_hex:(NSMutableArray*) b {
     
     NSString* hex;
     
@@ -78,7 +78,7 @@
 //step 2 move radix to after first bit * 2^exp representation
 // add 1023 to the exponent
 // then combine sign(1):exponent(11):mantissa(52)
-+ (NSMutableArray*)convert_64bitfloat:(int) k {
+- (NSMutableArray*)convert_64bitfloat:(int) k {
     
     NSMutableArray *reverse;
     NSMutableArray *binary;
@@ -140,7 +140,7 @@
 
 
 //for now I am going to assume we can write to an array
-+ (NSMutableArray*)text2binary:(NSString *)input {
+- (NSMutableArray*)text2binary:(NSString *)input {
     
     NSUInteger size = [input length];
     

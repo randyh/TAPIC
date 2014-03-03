@@ -7,6 +7,7 @@
 //
 
 #import "caf_generator.h"
+#import "TAPICbinary_converter.h"
 
 @implementation caf_generator
 
@@ -59,8 +60,8 @@ char newline = '\n';
     header = [NSString stringWithFormat:@"%@,%@", header, chunkType];
     
     int input_bytesize = [input length];
-    NSMutableArray* b = [bhelper text2binary:input_bytesize];
-    chunkSize = [bhelper convert_64bitfloat:b];
+    NSMutableArray* b = [bhelper convert_64bitfloat:input_bytesize];
+    chunkSize = [bhelper convert2_hex:b];
     
     header = [NSString stringWithFormat:@"%@,%@", header, chunkSize];
     
