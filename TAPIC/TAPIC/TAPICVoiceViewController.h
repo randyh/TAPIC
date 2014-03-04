@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "TAPICTabBarController.h"
 
 @interface TAPICVoiceViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 

@@ -48,10 +48,6 @@
                                nil];
     NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
     
-    // Setup audio session
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    
     // Define the recorder setting
     NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
     
@@ -84,14 +80,11 @@
     
     if (!recorder.recording)
     {
-        AVAudioSession *session = [AVAudioSession sharedInstance];
-        [session setActive:YES error:nil];
-        
         // Start recording
         [recorder record];
         
         // Update UI
-        [recordButton setTitle:@"Recording..." forState:UIControlStateNormal];
+        //[recordButton setTitle:@"Recording..." forState:UIControlStateNormal];
     }
 }
 
@@ -102,11 +95,8 @@
         // Stop recording
         [recorder stop];
         
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setActive:NO error:nil];
-        
         // Update UI
-        [recordButton setTitle:@"Record" forState:UIControlStateNormal];
+        //[recordButton setTitle:@"Record" forState:UIControlStateNormal];
         [sendButton setEnabled:YES];
     }
 }
@@ -122,9 +112,6 @@
     {
         // Stop recording
         [recorder stop];
-        
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setActive:NO error:nil];
     }
     
     if (sosTimer == nil)

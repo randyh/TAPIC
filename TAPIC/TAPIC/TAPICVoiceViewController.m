@@ -7,6 +7,7 @@
 //
 
 #import "TAPICVoiceViewController.h"
+#import "TAPICTabBarController.h"
 
 @interface TAPICVoiceViewController ()
 {
@@ -19,15 +20,6 @@
 @implementation TAPICVoiceViewController
 
 @synthesize pushToTalkButton;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -43,16 +35,12 @@
                                nil];
     NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
     
-    // Setup audio session
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    
     // Define the recorder setting
     NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
     
     [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
     [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
     
     // Initiate and prepare the recorder
     recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
@@ -61,12 +49,6 @@
     [recorder prepareToRecord];
     
     [pushToTalkButton setEnabled:NO];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)pushToTalkDown:(id)sender
@@ -79,10 +61,8 @@
     
     if (!recorder.recording)
     {
-        AVAudioSession *session = [AVAudioSession sharedInstance];
-        [session setActive:YES error:nil];
+        [TAPICTabBarController configureOutputOverride:YES];
         
-        // Start recording
         [recorder record];
     }
 }
@@ -91,11 +71,9 @@
 {
     if (recorder.recording)
     {
-        // Stop recording
         [recorder stop];
         
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setActive:NO error:nil];
+        [TAPICTabBarController configureOutputOverride:NO];
         
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
         [player setDelegate:self];
@@ -106,16 +84,6 @@
 - (IBAction)pushToTalkReleasedOut:(id)sender
 {
     [self pushToTalkReleased:sender];
-}
-
-- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
-{
-    
-}
-
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-
 }
 
 @end

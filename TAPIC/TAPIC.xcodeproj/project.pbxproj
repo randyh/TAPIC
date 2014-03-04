@@ -20,10 +20,15 @@
 		6810A39318A46F5800FD1F4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6810A39118A46F5800FD1F4D /* InfoPlist.strings */; };
 		6810A39518A46F5800FD1F4D /* TAPICTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6810A39418A46F5800FD1F4D /* TAPICTests.m */; };
 		6810A39F18A4701900FD1F4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6810A39E18A4701900FD1F4D /* Main.storyboard */; };
+		68686C8118BEDA3000F1719E /* TAPICTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68686C8018BEDA3000F1719E /* TAPICTabBarController.m */; };
+		68686C8B18BFC14D00F1719E /* TAPICMessageEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68686C8A18BFC14D00F1719E /* TAPICMessageEntryCell.m */; };
 		687AD44418A839D200E03673 /* TAPICVoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687AD44318A839D200E03673 /* TAPICVoiceViewController.m */; };
 		68ABDFDF18B1668200438DEF /* TAPICSOSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */; };
-		68ABDFE218B1B8DF00438DEF /* TAPICTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABDFE118B1B8DF00438DEF /* TAPICTextViewController.m */; };
-		68ABDFE518B28DA900438DEF /* TAPICTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */; };
+		68D0C09F18C28965004B5AB9 /* TAPICMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0C09E18C28965004B5AB9 /* TAPICMessage.m */; };
+		68D0C0A518C29D9A004B5AB9 /* TAPICTextMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0C0A418C29D9A004B5AB9 /* TAPICTextMessageViewController.m */; };
+		68D0C0A818C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0C0A718C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.m */; };
+		68D0C0AB18C3245E004B5AB9 /* TAPICReceivedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0C0AA18C3245E004B5AB9 /* TAPICReceivedMessage.m */; };
+		68D0C0AE18C3265B004B5AB9 /* TAPICReceivedMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0C0AD18C3265B004B5AB9 /* TAPICReceivedMessageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,15 +58,25 @@
 		6810A39018A46F5800FD1F4D /* TAPICTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TAPICTests-Info.plist"; sourceTree = "<group>"; };
 		6810A39218A46F5800FD1F4D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6810A39418A46F5800FD1F4D /* TAPICTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAPICTests.m; sourceTree = "<group>"; };
-		6810A39E18A4701900FD1F4D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		687AD44218A839D200E03673 /* TAPICVoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAPICVoiceViewController.h; path = TAPIC/TAPICVoiceViewController.h; sourceTree = "<group>"; };
-		687AD44318A839D200E03673 /* TAPICVoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAPICVoiceViewController.m; path = TAPIC/TAPICVoiceViewController.m; sourceTree = "<group>"; };
-		68ABDFDD18B1668100438DEF /* TAPICSOSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICSOSViewController.h; sourceTree = "<group>"; };
-		68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICSOSViewController.m; sourceTree = "<group>"; };
-		68ABDFE018B1B8DF00438DEF /* TAPICTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICTextViewController.h; sourceTree = "<group>"; };
-		68ABDFE118B1B8DF00438DEF /* TAPICTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICTextViewController.m; sourceTree = "<group>"; };
-		68ABDFE318B28DA900438DEF /* TAPICTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICTabBarController.h; sourceTree = "<group>"; };
-		68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICTabBarController.m; sourceTree = "<group>"; };
+		6810A39E18A4701900FD1F4D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		68686C7F18BEDA3000F1719E /* TAPICTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICTabBarController.h; sourceTree = SOURCE_ROOT; };
+		68686C8018BEDA3000F1719E /* TAPICTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICTabBarController.m; sourceTree = SOURCE_ROOT; };
+		68686C8918BFC14D00F1719E /* TAPICMessageEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICMessageEntryCell.h; sourceTree = "<group>"; };
+		68686C8A18BFC14D00F1719E /* TAPICMessageEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICMessageEntryCell.m; sourceTree = "<group>"; };
+		687AD44218A839D200E03673 /* TAPICVoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICVoiceViewController.h; sourceTree = "<group>"; };
+		687AD44318A839D200E03673 /* TAPICVoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICVoiceViewController.m; sourceTree = "<group>"; };
+		68ABDFDD18B1668100438DEF /* TAPICSOSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICSOSViewController.h; sourceTree = SOURCE_ROOT; };
+		68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICSOSViewController.m; sourceTree = SOURCE_ROOT; };
+		68D0C09D18C28965004B5AB9 /* TAPICMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICMessage.h; sourceTree = "<group>"; };
+		68D0C09E18C28965004B5AB9 /* TAPICMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICMessage.m; sourceTree = "<group>"; };
+		68D0C0A318C29D9A004B5AB9 /* TAPICTextMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAPICTextMessageViewController.h; path = TAPIC/TAPICTextMessageViewController.h; sourceTree = "<group>"; };
+		68D0C0A418C29D9A004B5AB9 /* TAPICTextMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAPICTextMessageViewController.m; path = TAPIC/TAPICTextMessageViewController.m; sourceTree = "<group>"; };
+		68D0C0A618C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICReceivedVoiceMessageTableViewController.h; sourceTree = "<group>"; };
+		68D0C0A718C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICReceivedVoiceMessageTableViewController.m; sourceTree = "<group>"; };
+		68D0C0A918C3245E004B5AB9 /* TAPICReceivedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICReceivedMessage.h; sourceTree = "<group>"; };
+		68D0C0AA18C3245E004B5AB9 /* TAPICReceivedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICReceivedMessage.m; sourceTree = "<group>"; };
+		68D0C0AC18C3265B004B5AB9 /* TAPICReceivedMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPICReceivedMessageCell.h; sourceTree = "<group>"; };
+		68D0C0AD18C3265B004B5AB9 /* TAPICReceivedMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPICReceivedMessageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,15 +106,6 @@
 		6810A36318A46F5800FD1F4D = {
 			isa = PBXGroup;
 			children = (
-				6810A39E18A4701900FD1F4D /* Main.storyboard */,
-				68ABDFE318B28DA900438DEF /* TAPICTabBarController.h */,
-				68ABDFE418B28DA900438DEF /* TAPICTabBarController.m */,
-				68ABDFE018B1B8DF00438DEF /* TAPICTextViewController.h */,
-				68ABDFE118B1B8DF00438DEF /* TAPICTextViewController.m */,
-				687AD44218A839D200E03673 /* TAPICVoiceViewController.h */,
-				687AD44318A839D200E03673 /* TAPICVoiceViewController.m */,
-				68ABDFDD18B1668100438DEF /* TAPICSOSViewController.h */,
-				68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */,
 				6810A37518A46F5800FD1F4D /* TAPIC */,
 				6810A38E18A46F5800FD1F4D /* TAPICTests */,
 				6810A36E18A46F5800FD1F4D /* Frameworks */,
@@ -130,6 +136,13 @@
 		6810A37518A46F5800FD1F4D /* TAPIC */ = {
 			isa = PBXGroup;
 			children = (
+				68686C7F18BEDA3000F1719E /* TAPICTabBarController.h */,
+				68686C8018BEDA3000F1719E /* TAPICTabBarController.m */,
+				6810A39E18A4701900FD1F4D /* Main.storyboard */,
+				68D0C0AF18C326B7004B5AB9 /* Received */,
+				68686C8518BF0D9400F1719E /* SOS */,
+				68686C8318BF0D1100F1719E /* Text */,
+				68686C8218BF0B9400F1719E /* Voice */,
 				6810A37E18A46F5800FD1F4D /* TAPICAppDelegate.h */,
 				6810A37F18A46F5800FD1F4D /* TAPICAppDelegate.m */,
 				6810A38118A46F5800FD1F4D /* Images.xcassets */,
@@ -165,6 +178,51 @@
 				6810A39118A46F5800FD1F4D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		68686C8218BF0B9400F1719E /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				687AD44218A839D200E03673 /* TAPICVoiceViewController.h */,
+				687AD44318A839D200E03673 /* TAPICVoiceViewController.m */,
+			);
+			name = Voice;
+			sourceTree = "<group>";
+		};
+		68686C8318BF0D1100F1719E /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				68D0C0A318C29D9A004B5AB9 /* TAPICTextMessageViewController.h */,
+				68D0C0A418C29D9A004B5AB9 /* TAPICTextMessageViewController.m */,
+				68D0C09D18C28965004B5AB9 /* TAPICMessage.h */,
+				68D0C09E18C28965004B5AB9 /* TAPICMessage.m */,
+				68686C8918BFC14D00F1719E /* TAPICMessageEntryCell.h */,
+				68686C8A18BFC14D00F1719E /* TAPICMessageEntryCell.m */,
+			);
+			name = Text;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		68686C8518BF0D9400F1719E /* SOS */ = {
+			isa = PBXGroup;
+			children = (
+				68ABDFDD18B1668100438DEF /* TAPICSOSViewController.h */,
+				68ABDFDE18B1668100438DEF /* TAPICSOSViewController.m */,
+			);
+			name = SOS;
+			sourceTree = "<group>";
+		};
+		68D0C0AF18C326B7004B5AB9 /* Received */ = {
+			isa = PBXGroup;
+			children = (
+				68D0C0A618C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.h */,
+				68D0C0A718C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.m */,
+				68D0C0AC18C3265B004B5AB9 /* TAPICReceivedMessageCell.h */,
+				68D0C0AD18C3265B004B5AB9 /* TAPICReceivedMessageCell.m */,
+				68D0C0A918C3245E004B5AB9 /* TAPICReceivedMessage.h */,
+				68D0C0AA18C3245E004B5AB9 /* TAPICReceivedMessage.m */,
+			);
+			name = Received;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,12 +322,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68D0C0A518C29D9A004B5AB9 /* TAPICTextMessageViewController.m in Sources */,
 				68ABDFDF18B1668200438DEF /* TAPICSOSViewController.m in Sources */,
 				6810A38018A46F5800FD1F4D /* TAPICAppDelegate.m in Sources */,
-				68ABDFE218B1B8DF00438DEF /* TAPICTextViewController.m in Sources */,
-				68ABDFE518B28DA900438DEF /* TAPICTabBarController.m in Sources */,
+				68686C8118BEDA3000F1719E /* TAPICTabBarController.m in Sources */,
 				6810A37C18A46F5800FD1F4D /* main.m in Sources */,
+				68D0C09F18C28965004B5AB9 /* TAPICMessage.m in Sources */,
+				68D0C0A818C322A3004B5AB9 /* TAPICReceivedVoiceMessageTableViewController.m in Sources */,
 				687AD44418A839D200E03673 /* TAPICVoiceViewController.m in Sources */,
+				68D0C0AE18C3265B004B5AB9 /* TAPICReceivedMessageCell.m in Sources */,
+				68D0C0AB18C3245E004B5AB9 /* TAPICReceivedMessage.m in Sources */,
+				68686C8B18BFC14D00F1719E /* TAPICMessageEntryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
