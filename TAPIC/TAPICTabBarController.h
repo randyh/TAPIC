@@ -15,13 +15,17 @@
 #define TEXT_TAB_INDEX 2
 #define RECEIVED_TAB_INDEX 3
 
-@interface TAPICTabBarController : UITabBarController
+@interface TAPICTabBarController : UITabBarController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
     AVAudioRecorder *listener;
     NSTimer *listenTimer;
 }
 
+@property (strong, nonatomic) AVAudioPlayer *player;
+@property (strong, nonatomic) AVAudioRecorder *recorder;
+
 + (void)activateAudioSession;
 + (void)configureOutputOverride:(BOOL)toSpeaker;
+- (void) playAudioFileFromURL:(NSURL*)url;
 
 @end

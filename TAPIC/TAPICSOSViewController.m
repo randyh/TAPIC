@@ -118,6 +118,7 @@
     {
         // Create player
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
+        [player setVolume:1.0];
         [player setDelegate:self];
         
         // Calculate timer period

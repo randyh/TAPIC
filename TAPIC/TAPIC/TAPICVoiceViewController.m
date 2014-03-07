@@ -13,6 +13,7 @@
 {
     AVAudioRecorder *recorder;
     AVAudioPlayer *player;
+    TAPICTabBarController *tabBarController;
 }
 
 @end
@@ -72,18 +73,20 @@
     if (recorder.recording)
     {
         [recorder stop];
-        
+        NSLog(@"Here");
         [TAPICTabBarController configureOutputOverride:NO];
-        
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
-        [player setDelegate:self];
-        [player play];
+        [tabBarController playAudioFileFromURL:recorder.url];
     }
 }
 
 - (IBAction)pushToTalkReleasedOut:(id)sender
 {
     [self pushToTalkReleased:sender];
+}
+
+- (void)setRootView:(TAPICTabBarController*)tabBarControl
+{
+    tabBarController = tabBarControl;
 }
 
 @end

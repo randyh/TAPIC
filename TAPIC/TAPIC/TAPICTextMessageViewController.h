@@ -28,4 +28,6 @@
 @property (strong, nonatomic) IBOutlet UIView *textFieldView;
 @property (strong, nonatomic) IBOutlet UITableView *messageTable;
 
+- (void)setRootView:(UITabBarController*)tabBarController;
+
 @end

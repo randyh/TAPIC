@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *receivedMessages;
 
 - (void)addMessageToRecievedList:(NSURL*)url date:(NSDate*)date;
+- (NSURL*)getNewMessageURL:(NSString*)extension;
 
 @end

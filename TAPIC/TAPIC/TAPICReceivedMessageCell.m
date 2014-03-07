@@ -20,8 +20,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
+        [self setBackgroundColor:[UIColor clearColor]];
         timestamp = [[UILabel alloc] init];
         [timestamp setFont:[UIFont boldSystemFontOfSize:18]];
+        CGRect cellFrame = [self frame];
+        [timestamp setFrame:CGRectMake(5, 0, cellFrame.size.width, cellFrame.size.height)];
         [self.contentView addSubview:timestamp];
     }
     return self;
@@ -43,7 +46,9 @@
 + (NSString*)getTimestampString:(NSDate*)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"%d/%m/%Y: %H:%M:%S"];
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [dateFormatter setLocale:usLocale];
+    [dateFormatter setDateFormat:@"MMM dd, YYYY: HH:mm:ss a"];
     return [dateFormatter stringFromDate:date];
 }
 

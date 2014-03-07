@@ -8,6 +8,9 @@
 
 #import "TAPICTabBarController.h"
 #import "TAPICReceivedVoiceMessageTableViewController.h"
+#import "TAPICTextMessageViewController.h"
+#import "TAPICVoiceViewController.h"
+#import "TAPICAudioFileGenerator.h"
 
 #define CHANNEL_TO_LISTEN 0
 
@@ -15,18 +18,43 @@ static BOOL isOverridden;
 
 @interface TAPICTabBarController ()
 {
+    TAPICReceivedVoiceMessageTableViewController *receivedMessageManager;
+    TAPICVoiceViewController *voiceMessageManager;
+    TAPICTextMessageViewController *textMessageManager;
+
     NSDictionary *listenerSettings;
+    NSDictionary *recorderSettings;
 }
 @end
 
 @implementation TAPICTabBarController
 
+@synthesize player, recorder;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-       
+    
+    receivedMessageManager =
+    (TAPICReceivedVoiceMessageTableViewController*)[self getViewController:RECEIVED_TAB_INDEX];
+    
+    voiceMessageManager =
+    (TAPICVoiceViewController*)[self getViewController:VOICE_TAB_INDEX];
+    [voiceMessageManager setRootView:self];
+    
+    textMessageManager =
+    (TAPICTextMessageViewController*)[self getViewController:TEXT_TAB_INDEX];
+    [textMessageManager setRootView:self];
+    
+    // Define the recorder setting
+    recorderSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithInt:kAudioFormatLinearPCM],     AVFormatIDKey,
+                        [NSNumber numberWithFloat:44100.0],                 AVSampleRateKey,
+                        [NSNumber numberWithInt: 1],                        AVNumberOfChannelsKey,
+                        nil];
+    
     listenerSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                        [NSNumber numberWithFloat: 44100.0],                 AVSampleRateKey,
+                        [NSNumber numberWithFloat: 32000.0],                 AVSampleRateKey,
                         [NSNumber numberWithInt: kAudioFormatAppleLossless], AVFormatIDKey,
                         [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
                         [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
@@ -47,8 +75,6 @@ static BOOL isOverridden;
     [TAPICTabBarController activateAudioSession];
     
     [self startListening];
-    
-    NSLog(@"View loaded");
 }
 
 - (void)startListening
@@ -101,14 +127,25 @@ static BOOL isOverridden;
 
 - (void)receiveMessage
 {
-    // record
-    
     NSLog(@"Message Received");
-    TAPICReceivedVoiceMessageTableViewController* tableViewController =
-    (TAPICReceivedVoiceMessageTableViewController*)[self getViewController:RECEIVED_TAB_INDEX];
-    NSURL* url = [NSURL fileURLWithPath:@"/dev/null"];
-    [tableViewController addMessageToRecievedList:url date:[NSDate date]];
-    // interpret
+    NSURL *url = [receivedMessageManager getNewMessageURL:@"wav"];
+    recorder = [self prepareRecorder:url];
+    [receivedMessageManager addMessageToRecievedList:url date:[NSDate date]];
+    
+    [recorder record];
+    
+    //interpret
+    [TAPICAudioFileGenerator getMessageData:[recorder url]];
+}
+
+- (AVAudioRecorder*)prepareRecorder:(NSURL*)outputFileURL
+{
+    // Initiate and prepare the recorder
+    recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recorderSettings error:NULL];
+    recorder.delegate = self;
+    recorder.meteringEnabled = YES;
+    [recorder prepareToRecord];
+    return recorder;
 }
 
 - (UIViewController*)getViewController:(int)index
@@ -151,6 +188,30 @@ static BOOL isOverridden;
     }
     
     if (!success)  NSLog(@"Unable to override output device: %@",error);
+}
+
+- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
+{
+    // Do nothing
+}
+
+- (void) playAudioFileFromURL:(NSURL*)url
+{
+    if (player == nil || !player.isPlaying )
+    {
+        NSLog(@"Trying to play...");
+        NSError* error;
+        [TAPICTabBarController activateAudioSession];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player setVolume:1.0];
+        [player setDelegate:self];
+        BOOL success = [player play];
+        if (!success)  NSLog(@"Unable to play: %@",error);
+        if (success)
+            NSLog(@"Successful!");
+        else
+            NSLog(@"Not Successful..");
+    }
 }
 
 @end

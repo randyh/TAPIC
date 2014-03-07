@@ -17,5 +17,6 @@
 - (IBAction)pushToTalkReleased:(id)sender;
 - (IBAction)pushToTalkReleasedOut:(id)sender;
 - (IBAction)pushToTalkDown:(id)sender;
+- (void)setRootView:(TAPICTabBarController*)tabBarControl;
 
 @end

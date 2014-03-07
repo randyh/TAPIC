@@ -7,8 +7,14 @@
 //
 
 #import "TAPICTextMessageViewController.h"
+#import "TAPICAudioFileGenerator.h"
+#import "TAPICTabBarController.h"
+
 
 @interface TAPICTextMessageViewController ()
+{
+    TAPICTabBarController *tabBarController;
+}
 
 @end
 
@@ -122,6 +128,9 @@
 - (IBAction)sendPressed:(id)sender
 {
     [self addMessageToTable:[textField text] isSent:YES];
+    
+    NSURL *textMessageURL = [TAPICAudioFileGenerator generateAudioFile:[textField text]];
+    [tabBarController playAudioFileFromURL:textMessageURL];
     [textField setText:@""];
     [self textViewDidChange:textField];
     [messageTable reloadData];
@@ -159,20 +168,13 @@
     return [messages count];
 }
 
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return @"";
-//}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyIdentifier = @"TAPICMessageEntryCell";
-    TAPICMessageEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    static NSString *cellIdentifier = @"TAPICMessageEntryCell";
+    TAPICMessageEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
     {
-        cell = [[TAPICMessageEntryCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
+        cell = [[TAPICMessageEntryCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:cellIdentifier];
     }
     TAPICMessage* message = [messages objectAtIndex:indexPath.row];
     [cell configureMessage:message tableWidth:tableView.frame.size.width];
@@ -185,7 +187,7 @@
     
     UITextView *textSizeView = [[UITextView alloc] init];
     [textSizeView setAttributedText:[message getText]];
-    CGSize size = [textSizeView sizeThatFits:CGSizeMake(messageTable.frame.size.width*MSG_WIDTH_RATIO, FLT_MAX)];
+    CGSize size = [textSizeView sizeThatFits:CGSizeMake(messageTable.frame.size.width*MSG_WIDTH_RATIO,FLT_MAX)];
     
     return size.height + (CELL_V_BUFFER * 2);
 }
@@ -225,6 +227,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setRootView:(TAPICTabBarController*)tabBarControl
+{
+    tabBarController = tabBarControl;
 }
 
 @end
