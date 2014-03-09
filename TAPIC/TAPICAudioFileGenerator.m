@@ -7,9 +7,10 @@
 //
 
 #import "TAPICAudioFileGenerator.h"
+#import "TAPICTextCorrection.h"
 
 #define TOLERANCE 20
-#define BIT_REPETITION 10
+#define BIT_REPETITION 30
 
 @interface TAPICAudioFileGenerator ()
 
@@ -19,54 +20,49 @@
 
 static int fileCount = 0;
 
-const int header_size = 44;
+static const int header_size = 44;
 
-//64 bit chunks size TBD, which is specified as:
-// The size, in bytes, of the data section for the chunk. This is the size of the chunk not including the header.
-// Unless noted otherwise for a particular chunk type, mChunkSize must always be valid.
-const int chunkSize_size = 8;
+// To denote the high and low values (do not want to go too close to 0 values
+static const Byte high[] = {0xDD};
+static const Byte low[] = {0x44};
 
-//to denote the high and low values (do not want to go too close to 0 values
-// these translate into D = 13, and 4 = 4 (obviously)
-Byte high[] = {0xDD};
-Byte low[] = {0x44};
-
-//8 bytes of data
-// WILL NEED RIGOROUS TESTING TO ENSUR THAT THIS WORKS and does not mask an audio signal
-const int digital_data_size = 10;
-const char digital_data[] = {'T', 'A', 'P', 'I', 'C', 't', 'a', 'p', 'i', 'c'};
+// Header to indicate that the file is digital data
+static const Byte digital_data_size = 52;
+static const Byte digital_data[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
 + (NSURL*) generateAudioFile:(NSString*)input
 {
     if ([input length] == 0)
         return nil;
     
-    NSData *inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *inputData = [input dataUsingEncoding:NSUnicodeStringEncoding];
     long chunkSize = [inputData length]*(8*BIT_REPETITION) + digital_data_size;
     
     NSMutableData *data = [[NSMutableData alloc] initWithBytes:[TAPICAudioFileGenerator constructFileHeader:chunkSize] length:header_size];
     
     [data appendBytes:digital_data length:digital_data_size];
     
-    const char *dataArray = [inputData bytes];
-    NSUInteger size = [input length];
+    const Byte *dataArray = [inputData bytes];
+    NSUInteger size = [inputData length];
     
     for(int i = 0; i < size; i++)
     {
-        char c = dataArray[i];
+        Byte c = dataArray[i];
         for(int j = 0; j < 8; j++)
         {
-            char bit = {(char)((c >> j) & 1)};
+            Byte bit = {(Byte)((c >> j) & 1)};
             for (int k = 0; k < BIT_REPETITION; k++)
             {
                 if (bit)
-                    [data appendBytes:high length:2];
+                    [data appendBytes:high length:1];
                 else
-                    [data appendBytes:low length:2];
+                    [data appendBytes:low length:1];
             }
         }
     }
     
+    Byte *data1 = (Byte*)malloc([data length]);
+    [data getBytes:data1 length:[data length]];
     
     // need to figure out how to create audio file
     NSURL *audioFileURL = [self getNewMessageURL:@"wav"];
@@ -75,48 +71,138 @@ const char digital_data[] = {'T', 'A', 'P', 'I', 'C', 't', 'a', 'p', 'i', 'c'};
     return audioFileURL;
 }
 
-+ (NSString*)getMessageData:(NSURL*)audioInput
++ (BOOL)isDigitalMessage:(Byte*)inputData arraySize:(unsigned long)size
 {
+    BOOL b = YES;
+    if( size < digital_data_size + header_size)
+    {
+        return NO;
+    }
+    
+    // threshold value, NEED TO TEST later on & make possible changes
+    int AMPLITUDE_GAP = 10;
+    int count = 0;
+    int within_gap_count = 0;
+    
+    for(int i = header_size; i < header_size + digital_data_size-1; i++)
+    {
+        if(inputData[i] < inputData[i+1])
+        {
+            count++;
+        }
+        else if((inputData[i] - AMPLITUDE_GAP) < inputData[i+1])
+        {
+            within_gap_count++;
+        }
+    }
+    
+    if(count < (digital_data_size / 2))
+    {
+        b = NO;
+    }
+    // 48 is also a threshold value we will need to test to change
+    else if( count + within_gap_count < 48)
+    {
+        b = NO;
+    }
+    
+    return b;
+    
     /*
-    // need to figure out how to load data from file into byte array
+     int offset = 5;
+     int avg = 0;
+     int median = 0;
+     //int AMPLITUDE_GAP = 20;
+     //int count =  0;
+     
+     int avg_count = (2*offset)  + 1;
+     
+     // to initialize the averaging function
+     for(int i = header_size; i < header_size + avg_count; i++)
+     {
+     avg += (int) inputData[i];
+     }
+     avg = avg / ( (2*offset)+1);
+     median = inputData[header_size + offset + 1];
+     if(median - AMPLITUDE_GAP < avg && median + AMPLITUDE_GAP > avg)
+     {
+     count++;
+     }
+     
+     for(int i = header_size + avg_count; i < header_size + avg_count + digital_data_size; i++ )
+     {
+     avg = avg * (2*offset + 1);
+     avg -= inputData[i - (2*offset + 1)];
+     avg += inputData[i];
+     avg = (avg / avg_count);
+     median = inputData[i - offset];
+     if(median - AMPLITUDE_GAP < avg && median + AMPLITUDE_GAP > avg)
+     {
+     count++;
+     }
+     }
+     
+     if(count > 48 - avg_count){
+     return YES;
+     }
+     
+     */
+}
+
++ (NSString*)getMessageData:(NSURL*)audioInputURL
+{
+    NSData *inputData = [NSData dataWithContentsOfURL:audioInputURL];
+    unsigned long dataLength = [inputData length];
     
-    int dataLength = [inputData length];
-    
-    char data[dataLength];
+    Byte *data = (Byte*)malloc(dataLength);
     [inputData getBytes:data length:[inputData length]];
     
-    int totalHeaderSize = header_size + chunkSize_size + format_header_size;
-    
-    for (int i = 0; i <  10; i++)
+    if (![TAPICAudioFileGenerator isDigitalMessage:data arraySize:dataLength])
     {
-        if (!(data[i + totalHeaderSize] > (digital_data[i]-TOLERANCE) &&
-              data[i + totalHeaderSize] < (digital_data[i]+TOLERANCE)))
-            return nil; // Is not digital data
+        return nil;
     }
     
     NSMutableData *decodedData = [[NSMutableData alloc] init];
     
-    totalHeaderSize += 10;
+    int totalHeaderSize = header_size + digital_data_size;
     int bitCount = 0;
-    char byte[1] = {0};
+    Byte byte[] = {0};
+    
+    int highCount = 0;
+    int lowCount = 0;
     
     // Since there are multiple bytes for each bit, increment by BIT_REPETITION
-    for (int i = totalHeaderSize; i < dataLength; i = i+BIT_REPETITION)
+    int highRangeLow = ((int)high[0]) - TOLERANCE;
+    int highRangeHigh = ((int)high[0]) + TOLERANCE;
+    int lowRangeLow = ((int)low[0]) - TOLERANCE;
+    int lowRangeHigh = ((int)low[0]) + TOLERANCE;
+    
+    for (int i = totalHeaderSize; i < dataLength; i = i + BIT_REPETITION)
     {
         for (int j = 0; j < BIT_REPETITION; j++)
         {
-            if ((data[i+j] > (high[0]- TOLERANCE)) && (data[i+j] < (high[0]+ TOLERANCE))) // is high
+            int currentData = ((int)(data[i+j]));
+            if ((currentData > highRangeLow) && (currentData < highRangeHigh)) // is high
             {
-                byte[0] |= (1 << bitCount);
-                continue;
+                highCount++;
             }
-            else if ((data[i+j] > (low[0]- TOLERANCE)) && (data[i+j] < (low[0]+ TOLERANCE))) // is low
+            else if ((currentData > lowRangeLow) && (currentData < lowRangeHigh)) // is low
             {
-                // do nothing; bit is already 0
-                continue;
+                lowCount++;
             }
         }
         
+        if (highCount >= lowCount)
+        {
+            byte[0] |= (1 << bitCount);
+        }
+        else if (lowCount > highCount)
+        {
+            byte[0] &= ~(1 << bitCount);
+        }
+        
+        highCount = 0;
+        lowCount = 0;
         bitCount++;
         
         if (bitCount == 8)
@@ -127,15 +213,19 @@ const char digital_data[] = {'T', 'A', 'P', 'I', 'C', 't', 'a', 'p', 'i', 'c'};
         }
     }
     
-    NSString *text = [[NSString alloc] initWithBytes:[decodedData bytes] length:[decodedData length] encoding:NSUTF8StringEncoding];
-    return text;*/
-    return nil;
+    NSString *text = [[NSString alloc] initWithBytes:[decodedData bytes] length:[decodedData length] encoding:NSUnicodeStringEncoding];
+    text = [TAPICTextCorrection correctReceivedText:text];
+    
+    [[NSFileManager defaultManager] removeItemAtURL:audioInputURL error:nil];
+    free(data);
+    
+    return text;
 }
 
 +(Byte*)constructFileHeader:(long)totalAudioLength
 {
     long totalDataLength = totalAudioLength + header_size;
-    long longSampleRate = 32000.0;
+    long longSampleRate = 11025.0;
     int channels = 1;
     int bitsPerSample = 16;
     long byteRate = 16 * longSampleRate * (channels/8);

@@ -8,12 +8,14 @@
 
 #import "TAPICSOSViewController.h"
 
+static int fileCount = 0;
+
 @interface TAPICSOSViewController ()
 {
-    AVAudioRecorder *recorder;
-    AVAudioPlayer *player;
+    TAPICTabBarController *tabBarController;
     
     NSTimer *sosTimer;
+    NSURL *sosURL;
     BOOL sosInProgress;
 }
 
@@ -37,30 +39,7 @@
 {
     [super viewDidLoad];
     
-    // Disable 'Record' and 'Send' button when application launches
-    [recordButton setEnabled:NO];
     [sendButton setEnabled:NO];
-    
-    // Set the audio file
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"SOS.m4a",
-                               nil];
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
-    
-    // Define the recorder setting
-    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
-    
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
-    
-    // Initiate and prepare the recorder
-    recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
-    recorder.delegate = self;
-    recorder.meteringEnabled = YES;
-    [recorder prepareToRecord];
-    
     [recordButton setEnabled:YES];
 }
 
@@ -72,33 +51,18 @@
 
 - (IBAction)recordDown:(id)sender
 {
-    // Stop the audio player before recording
-    if (player.playing)
-    {
-        [player stop];
-    }
+    [tabBarController stopPlaying];
     
-    if (!recorder.recording)
-    {
-        // Start recording
-        [recorder record];
-        
-        // Update UI
-        //[recordButton setTitle:@"Recording..." forState:UIControlStateNormal];
-    }
+    sosURL = [TAPICSOSViewController getNewSOSURL:@"wav"];
+    
+    [tabBarController startRecording:sosURL fromSpeaker:YES];
 }
 
 - (IBAction)recordReleased:(id)sender
 {
-    if (recorder.recording)
-    {
-        // Stop recording
-        [recorder stop];
-        
-        // Update UI
-        //[recordButton setTitle:@"Record" forState:UIControlStateNormal];
-        [sendButton setEnabled:YES];
-    }
+    [tabBarController finishRecording];
+    
+    [sendButton setEnabled:YES];
 }
 
 - (IBAction)recordReleasedOut:(id)sender
@@ -108,24 +72,12 @@
 
 - (IBAction)sendPressed:(id)sender
 {
-    if (recorder.recording)
-    {
-        // Stop recording
-        [recorder stop];
-    }
-    
     if (sosTimer == nil)
     {
-        // Create player
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
-        [player setVolume:1.0];
-        [player setDelegate:self];
+        [tabBarController playAudioFileFromURL:sosURL toSpeaker:NO];
         
         // Calculate timer period
-        NSTimeInterval timerPeriod = [intervalStepper value] + player.duration;
-        
-        // Send first SOS (timer doesn't start sending until the period has elapsed)
-        [self sendSOS];
+        NSTimeInterval timerPeriod = [intervalStepper value] + [tabBarController getPlayerDuration] + 1;
         
         // Start timer, calls 'sendSOS' every period
         sosTimer = [NSTimer scheduledTimerWithTimeInterval:timerPeriod
@@ -144,9 +96,6 @@
     {
         // Stop timer
         [self stopSOS];
-        
-        // Update UI
-        [recordButton setEnabled:YES];
     }
 }
 
@@ -158,13 +107,8 @@
 
 - (void) sendSOS
 {
-    // If the player is currently playing, stop it
-    if (player.isPlaying)
-    {
-        [player stop];
-    }
-    
-    [player play];
+    BOOL success = [tabBarController playAudioFileFromURL:sosURL toSpeaker:NO];
+    if (!success) [self stopSOS];
 }
 
 - (void) stopSOS
@@ -179,17 +123,24 @@
         [intervalStepper setEnabled:YES];
         [intervalStepper setSelected:YES];
         [sendButton setTitle:@"Send" forState:UIControlStateNormal];
+        [recordButton setEnabled:YES];
     }
 }
 
-- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
++ (NSURL*)getNewSOSURL:(NSString*)extension
 {
-    // Do nothing
+    NSString *path =[[NSString alloc] initWithFormat:@"TAPICSOSMessage%d.%@",fileCount,extension];
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               path,
+                               nil];
+    fileCount++;
+    return [NSURL fileURLWithPathComponents:pathComponents];
 }
 
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+- (void)setRootView:(TAPICTabBarController*)tabBarControl
 {
-    // Do nothing
+    tabBarController = tabBarControl;
 }
 
 @end

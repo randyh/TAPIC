@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+#import "TAPICTabBarController.h"
 
 @interface TAPICSOSViewController  : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
@@ -21,5 +21,6 @@
 - (IBAction)recordDown:(id)sender;
 - (IBAction)sendPressed:(id)sender;
 - (IBAction)intervalChanged:(UIStepper *)sender;
+- (void)setRootView:(TAPICTabBarController*)tabBarControl;
 
 @end

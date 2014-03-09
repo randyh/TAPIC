@@ -18,7 +18,7 @@
 #define TEXT_ENTRY_BUFFER 5
 #define SEND_BUTTON_WIDTH 50
 
-#define CACHED_MESSAGE_LIMIT 10
+#define CACHED_MESSAGE_LIMIT 50
 
 @interface TAPICTextMessageViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
@@ -29,5 +29,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *messageTable;
 
 - (void)setRootView:(UITabBarController*)tabBarController;
+- (void)addMessageToTable:(NSString*)text isSent:(BOOL)isSent;
 
 @end

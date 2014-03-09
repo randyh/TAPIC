@@ -139,7 +139,7 @@
                         <segue destination="2ov-ce-X8o" kind="relationship" relationship="viewControllers" id="XzX-wd-FCZ"/>
                         <segue destination="0ZN-GN-Ixi" kind="relationship" relationship="viewControllers" id="AOV-AV-zcE"/>
                         <segue destination="uHl-af-uCe" kind="relationship" relationship="viewControllers" id="u9j-b5-Rdr"/>
-                        <segue destination="xaK-ne-Uei" kind="relationship" relationship="viewControllers" id="BIp-C5-bcM"/>
+                        <segue destination="Ehv-54-19n" kind="relationship" relationship="viewControllers" id="lQf-EA-vuC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUq-So-nhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -147,30 +147,37 @@
             <point key="canvasLocation" x="-251" y="462"/>
         </scene>
         <!--Received Voice Message Table View Controller - Received-->
-        <scene sceneID="uEG-is-bwc">
+        <scene sceneID="IKT-cG-xbO">
             <objects>
-                <viewController title="Received" id="xaK-ne-Uei" customClass="TAPICReceivedVoiceMessageTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KJb-b2-dZ8">
+                <viewController id="Ehv-54-19n" customClass="TAPICReceivedVoiceMessageTableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bFk-F2-0da"/>
+                        <viewControllerLayoutGuide type="bottom" id="QOC-pP-w6G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Zb-6l-Po9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KJb-b2-dZ8">
+                                <rect key="frame" x="0.0" y="20" width="320" height="497"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <color key="sectionIndexTrackingBackgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <connections>
-                            <outlet property="dataSource" destination="xaK-ne-Uei" id="R9n-dW-buB"/>
-                            <outlet property="delegate" destination="xaK-ne-Uei" id="Av1-Lt-CzB"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Received" id="JZ1-y4-64e">
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Received" id="cjG-WC-zDv">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="receivedMessagesTable" destination="KJb-b2-dZ8" id="8HK-aM-3pF"/>
+                        <outlet property="receivedMessagesTable" destination="KJb-b2-dZ8" id="Ekx-OX-Pwz"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s7z-dD-Eoc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9bL-GK-pMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="283" y="1481"/>
         </scene>

@@ -9,14 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "TAPICReceivedMessage.h"
 #import "TAPICReceivedMessageCell.h"
+#import "TAPICTabBarController.h"
 
-#define CACHED_VOICE_MSG_MAX 10
+#define CACHED_VOICE_MSG_MAX 20
 
-@interface TAPICReceivedVoiceMessageTableViewController : UITableViewController
+@interface TAPICReceivedVoiceMessageTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *receivedMessagesTable;
 @property (nonatomic, strong) NSMutableArray *receivedMessages;
 
 - (void)addMessageToRecievedList:(NSURL*)url date:(NSDate*)date;
-- (NSURL*)getNewMessageURL:(NSString*)extension;
++ (NSURL*)getNewMessageURL:(NSString*)extension;
+- (void)setRootView:(TAPICTabBarController*)tabBarControl;
+
 
 @end

@@ -53,7 +53,6 @@
     [sendButton setTitle:@"Send" forState:UIControlStateHighlighted];
     [sendButton setEnabled:NO];
     [sendButton addTarget:self action:@selector(sendPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [sendButton addTarget:self action:@selector(sendPressedOut:) forControlEvents:UIControlEventTouchUpOutside];
     [sendButton setFrame:CGRectMake(textFieldView.frame.size.width - (SEND_BUTTON_WIDTH + TEXT_ENTRY_BUFFER), TEXT_ENTRY_BUFFER, SEND_BUTTON_WIDTH, TEXT_ENTRY_HEIGHT)];
     
     textField = [[UITextView alloc] init];
@@ -66,6 +65,7 @@
     [textField setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
     [textField setDataDetectorTypes:UIDataDetectorTypeAll];
     [textField setKeyboardAppearance:UIKeyboardAppearanceDark];
+    [textField setKeyboardType:UIKeyboardTypeASCIICapable];
     [textField setFrame:CGRectMake(TEXT_ENTRY_BUFFER, TEXT_ENTRY_BUFFER, textFieldView.frame.size.width - (SEND_BUTTON_WIDTH + 3*TEXT_ENTRY_BUFFER), TEXT_ENTRY_HEIGHT)];
 
     [textFieldView addSubview:sendButton];
@@ -130,18 +130,9 @@
     [self addMessageToTable:[textField text] isSent:YES];
     
     NSURL *textMessageURL = [TAPICAudioFileGenerator generateAudioFile:[textField text]];
-    [tabBarController playAudioFileFromURL:textMessageURL];
-    [textField setText:@""];
-    [self textViewDidChange:textField];
-    [messageTable reloadData];
-    
-    [sendButton setEnabled:NO];
-    [self scrollToBottomOfTable];
-}
-
-- (IBAction)sendPressedOut:(id)sender
-{
-    [self addMessageToTable:[textField text] isSent:NO];
+    [tabBarController playAudioFileFromURL:textMessageURL toSpeaker:NO];
+    NSString * text = [TAPICAudioFileGenerator getMessageData:textMessageURL];
+    [self addMessageToTable:text isSent:NO];
     [textField setText:@""];
     [self textViewDidChange:textField];
     [messageTable reloadData];
